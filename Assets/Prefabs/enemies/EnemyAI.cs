@@ -8,9 +8,9 @@ public class EnemyAI : MonoBehaviour {
     public float speed, attackRateInSeconds;
     public GameObject number;
 
-    private float speedVariance, deathTime;
+    private float speedVariance, deathTime, hitTime;
     private PlayerController player;
-    private bool attacked, dead;
+    private bool attacked, dead, knockback;
 
     void Start()
     {
@@ -22,7 +22,7 @@ public class EnemyAI : MonoBehaviour {
     // Update is called once per frame
     void Update ()
     {
-        if (!dead) { MovementAndAttack(); }   
+        if (!dead && !knockback) { MovementAndAttack(); }   
         if (dead)
         {
             if (Time.time >= deathTime + 15)
@@ -33,6 +33,14 @@ public class EnemyAI : MonoBehaviour {
                     Destroy(gameObject);
                 }
                 
+            }
+        }
+        if(knockback)
+        {
+            transform.position += (Vector3.right*2) * Time.deltaTime;
+            if(Time.time >= hitTime + 0.4f)
+            {
+                knockback = false;
             }
         }
     }
@@ -70,8 +78,13 @@ public class EnemyAI : MonoBehaviour {
     {
         hp -= damage;        
         if (hp <= 0)
-        {
+        {           
             Dead();
+        }
+        else
+        {
+            hitTime = Time.time;
+            knockback = true;
         }
     }
 

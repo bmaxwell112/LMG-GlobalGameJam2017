@@ -81,13 +81,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3354bc3de538e5a45a394b5408440bd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minPos: 0
-  maxPos: 0
-  speed: 0
-  stikeDistance: 0
-  escapeNumber: 0
-  damage: 0
-  hp: 0
+  minPos: 2
+  maxPos: 15
+  speed: 2
+  stikeDistance: 1.5
+  coolDownRateInSeconds: 0.1
+  walkDistance: 0
+  enemyCheckRadius: 0.25
+  escapeNumber: 20
+  damage: 10
+  hp: 50
   number: {fileID: 1774551873252190, guid: 93a8d497658ff7d45adc525b9a31f453, type: 2}
 --- !u!212 &212786719886848300
 SpriteRenderer:
