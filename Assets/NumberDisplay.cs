@@ -8,11 +8,10 @@ public class NumberDisplay : MonoBehaviour {
     public float liveTime = 1;
 
     private float spawnTime;
-    private Text number;
+    public Text number;
 
 	// Use this for initialization
 	void Start () {
-        number = GetComponentInChildren<Text>();
         spawnTime = Time.time;
 	}
 	
@@ -26,7 +25,7 @@ public class NumberDisplay : MonoBehaviour {
 	}
 
     public void SetNumber(int value)
-    {
+    {        
         number.text = value.ToString();
     }
 }

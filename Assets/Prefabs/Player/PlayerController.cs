@@ -44,7 +44,8 @@ public class PlayerController : MonoBehaviour {
         {
             print("escape button");
             buttonPressed++;
-            if(buttonPressed >= escapeNumber)
+            SpawnNumber(buttonPressed, transform.position);
+            if (buttonPressed >= escapeNumber)
             {                
                 lvl.LoadLevel("03a Win");
             }
@@ -53,12 +54,13 @@ public class PlayerController : MonoBehaviour {
 
     void AttackOrBarricade()
     {
-        RaycastHit2D hit = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y), Vector2.right, stikeDistance);
+        RaycastHit2D hit = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y), (Vector2.right/10), stikeDistance);
         if (hit)
         {      
             if(hit.collider.gameObject.CompareTag("enemy"))
             {
                 hit.collider.gameObject.GetComponent<EnemyAI>().DamageEnemy(damage);
+                SpawnNumber(damage, hit.collider.gameObject.transform.position);
             }                        
         }
         else
@@ -73,10 +75,17 @@ public class PlayerController : MonoBehaviour {
 
     public void DamagePlayer(int damage)
     {
-        hp -= damage;
-        if(hp <= 0)
+        hp -= damage;        
+        if (hp <= 0)
         {
             lvl.LoadLevel("03b Lose");
         }
+    }
+
+    void SpawnNumber(int value, Vector3 spawnPos)
+    {
+        GameObject numClone = Instantiate(number, transform.position + (Vector3.up*3), Quaternion.identity) as GameObject;
+        numClone.GetComponent<NumberDisplay>().SetNumber(value);
+        numClone.transform.position = spawnPos + (Vector3.up * 2);
     }
 }
