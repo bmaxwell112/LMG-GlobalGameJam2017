@@ -6,6 +6,7 @@ public class EnemyAI : MonoBehaviour {
 
     public int hp, attack;
     public float speed, attackRateInSeconds;
+    public GameObject number;
 
     private float speedVariance;
     private PlayerController player;
@@ -20,7 +21,7 @@ public class EnemyAI : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        if (transform.position.x > player.transform.position.x + 0.1)
+        if (transform.position.x > player.transform.position.x + 0.3)
         {
             transform.position -= new Vector3(speedVariance, 0, 0) * Time.deltaTime;
         }
@@ -42,16 +43,24 @@ public class EnemyAI : MonoBehaviour {
     void EnemyAttack()
     {
         player.DamagePlayer(attack);
+        SpawnNumber(attack, player.transform.position);
         attacked = true;
         Invoke("AttackDelay", attackRateInSeconds);
     }
 
     public void DamageEnemy(int damage)
     {
-        hp -= damage;
-        if(hp <= 0)
+        hp -= damage;        
+        if (hp <= 0)
         {
             Destroy(gameObject);
         }
+    }
+
+    void SpawnNumber(int value, Vector3 spawnPos)
+    {
+        GameObject numClone = Instantiate(number, transform.position + (Vector3.up * 3), Quaternion.identity) as GameObject;
+        numClone.GetComponent<NumberDisplay>().SetNumber(value);
+        numClone.transform.position = spawnPos + (Vector3.up * 2);
     }
 }
