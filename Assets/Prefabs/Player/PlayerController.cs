@@ -50,6 +50,10 @@ public class PlayerController : MonoBehaviour {
                 lvl.LoadLevel("03a Win");
             }
         }
+        if (Input.GetKeyUp(KeyCode.LeftArrow))
+        {
+            left = false;
+        }
     }
 
     void AttackOrBarricade()

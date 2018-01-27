@@ -8,9 +8,9 @@ public class EnemyAI : MonoBehaviour {
     public float speed, attackRateInSeconds;
     public GameObject number;
 
-    private float speedVariance;
+    private float speedVariance, deathTime;
     private PlayerController player;
-    private bool attacked;
+    private bool attacked, dead;
 
     void Start()
     {
@@ -20,7 +20,25 @@ public class EnemyAI : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update () {
+    void Update ()
+    {
+        if (!dead) { MovementAndAttack(); }   
+        if (dead)
+        {
+            if (Time.time >= deathTime + 15)
+            {
+                transform.localScale += Vector3.down * Time.deltaTime;
+                if(transform.localScale.y <= 0)
+                {
+                    Destroy(gameObject);
+                }
+                
+            }
+        }
+    }
+
+    private void MovementAndAttack()
+    {
         if (transform.position.x > player.transform.position.x + 0.3)
         {
             transform.position -= new Vector3(speedVariance, 0, 0) * Time.deltaTime;
@@ -35,7 +53,7 @@ public class EnemyAI : MonoBehaviour {
                 EnemyAttack();
         }
     }
-    
+
     void AttackDelay()
     {
         attacked = false;
@@ -53,7 +71,7 @@ public class EnemyAI : MonoBehaviour {
         hp -= damage;        
         if (hp <= 0)
         {
-            Destroy(gameObject);
+            Dead();
         }
     }
 
@@ -62,5 +80,15 @@ public class EnemyAI : MonoBehaviour {
         GameObject numClone = Instantiate(number, transform.position + (Vector3.up * 3), Quaternion.identity) as GameObject;
         numClone.GetComponent<NumberDisplay>().SetNumber(value);
         numClone.transform.position = spawnPos + (Vector3.up * 2);
+    }
+
+    void Dead()
+    {
+        dead = true;
+        Collider2D coll = GetComponent<Collider2D>();
+        Animator anim = GetComponent<Animator>();
+        coll.enabled = false;
+        deathTime = Time.time;
+        anim.SetTrigger("dead");
     }
 }
