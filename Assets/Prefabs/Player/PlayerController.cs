@@ -4,16 +4,22 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
 
-    public float minPos, maxPos, speed;
-    public int escapeNumber;
+    public float minPos, maxPos, speed, stikeDistance;
+    public int escapeNumber, damage, hp;
+    public GameObject number;
 
     private bool left;
     private int buttonPressed = 0;
+    private LevelManager lvl;
+
+    private void Start()
+    {
+        lvl = FindObjectOfType<LevelManager>();
+    }
 
     // Update is called once per frame
     void Update () {
-        InputCheck();
-        
+        InputCheck();        
     }
 
     void InputCheck()
@@ -29,28 +35,45 @@ public class PlayerController : MonoBehaviour {
             left = false;
         }
         if (Input.GetKeyDown(KeyCode.Space) && !left)
-        {      
-            if(Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y), Vector2.right, 20f))
-            {
-                print("hit");
-            }
-            else
-            {
-                if(transform.position.x >= maxPos - 0.2f)
-                {
-                    print("build barricade");
-                }
-            }
+        {
+            AttackOrBarricade();
         }
         else if (Input.GetKeyDown(KeyCode.Space) && left && transform.position.x <= minPos + 0.5)
         {
             print("escape button");
             buttonPressed++;
             if(buttonPressed >= escapeNumber)
-            {
-                LevelManager lvl = FindObjectOfType<LevelManager>();
+            {                
                 lvl.LoadLevel("03a Win");
             }
+        }
+    }
+
+    void AttackOrBarricade()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y), Vector2.right, stikeDistance);
+        if (hit)
+        {      
+            if(hit.collider.gameObject.CompareTag("enemy"))
+            {
+                hit.collider.gameObject.GetComponent<EnemyAI>().DamageEnemy(damage);
+            }                        
+        }
+        else
+        {
+            if (transform.position.x >= maxPos - 0.2f)
+            {
+                print("build barricade");
+            }
+        }
+    }
+
+    public void DamagePlayer(int damage)
+    {
+        hp -= damage;
+        if(hp <= 0)
+        {
+            lvl.LoadLevel("03b Lose");
         }
     }
 }
