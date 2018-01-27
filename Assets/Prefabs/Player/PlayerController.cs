@@ -24,6 +24,11 @@ public class PlayerController : MonoBehaviour {
         if(Input.GetKeyDown(KeyCode.Space))
         {
             print("attack");
+            
+            if(Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y), Vector2.right, 20f))
+            {
+                print("hit");
+            }
         }
     }
 }
