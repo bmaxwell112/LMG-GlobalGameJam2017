@@ -4,13 +4,8 @@ using UnityEngine;
 
 public class EnemyAI : MonoBehaviour {
 
-    public int speed;
-
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
+    public int speed, hp, attack;
+    
 	// Update is called once per frame
 	void Update () {
         transform.position -= new Vector3(speed, 0, 0) * Time.deltaTime;

@@ -29,12 +29,17 @@ public class PlayerController : MonoBehaviour {
             left = false;
         }
         if (Input.GetKeyDown(KeyCode.Space) && !left)
-        {
-            print("attack");
-            
+        {      
             if(Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y), Vector2.right, 20f))
             {
                 print("hit");
+            }
+            else
+            {
+                if(transform.position.x >= maxPos - 0.2f)
+                {
+                    print("build barricade");
+                }
             }
         }
         else if (Input.GetKeyDown(KeyCode.Space) && left && transform.position.x <= minPos + 0.5)
