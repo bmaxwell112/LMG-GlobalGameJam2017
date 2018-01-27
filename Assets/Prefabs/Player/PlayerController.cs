@@ -11,10 +11,12 @@ public class PlayerController : MonoBehaviour {
     private bool left;
     private int buttonPressed = 0;
     private LevelManager lvl;
+    private BarricadeManager BarricadeReference;
 
     private void Start()
     {
         lvl = FindObjectOfType<LevelManager>();
+        BarricadeReference = GameObject.FindWithTag("Barricade").GetComponent<BarricadeManager>();
     }
 
     // Update is called once per frame
@@ -66,6 +68,7 @@ public class PlayerController : MonoBehaviour {
             if (transform.position.x >= maxPos - 0.2f)
             {
                 print("build barricade");
+                BarricadeReference.BuildBarricade();
             }
         }
     }
