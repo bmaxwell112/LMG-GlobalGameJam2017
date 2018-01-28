@@ -12,7 +12,6 @@ public class EnemyAI : MonoBehaviour {
     private PlayerController player;
     private BarricadeManager barricade;
     private int colliding = 0;
-    private BoxCollider2D boxCollider;
     [HideInInspector]
     public bool attacked, dead, knockback;
 
@@ -22,7 +21,6 @@ public class EnemyAI : MonoBehaviour {
         speedVariance = speed + rand;
         player = FindObjectOfType<PlayerController>();
         barricade = FindObjectOfType<BarricadeManager>();
-        boxCollider = GetComponent<BoxCollider2D>();
     }
 
     // Update is called once per frame
@@ -69,6 +67,14 @@ public class EnemyAI : MonoBehaviour {
         }
     }
 
+    void OnTriggerStay2D(Collider2D coll)
+    {
+        if ((coll.gameObject.tag == "Player" || coll.gameObject.tag == "barricade") && !attacked)
+        {
+            EnemyAttack(coll.gameObject.tag);
+        }
+    }
+
     void OnTriggerExit2D(Collider2D coll)
     {
         Debug.Log("exit");
@@ -91,7 +97,6 @@ public class EnemyAI : MonoBehaviour {
     void AttackDelay()
     {
         Debug.Log("attacked is false");
-        boxCollider.enabled = true;
         attacked = false;
     }
     void EnemyAttack(string tag)
@@ -107,7 +112,6 @@ public class EnemyAI : MonoBehaviour {
             SpawnNumber(attack, barricade.transform.position);
         }
         attacked = true;
-        boxCollider.enabled = false;
         Invoke("AttackDelay", attackRateInSeconds);
     }
 
