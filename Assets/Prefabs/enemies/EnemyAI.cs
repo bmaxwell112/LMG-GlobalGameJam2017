@@ -118,7 +118,7 @@ public class EnemyAI : MonoBehaviour {
             player.DamagePlayer(attack);
             SpawnNumber(attack, player.transform.position);
         }
-        if(tag == "Barricade")
+        if(tag == "Barricade" && barricade.health > 0)
         {
             barricade.TakeDamage(attack);
             SpawnNumber(attack, barricade.transform.position);
