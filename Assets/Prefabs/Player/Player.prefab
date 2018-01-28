@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4849987267692228}
   - component: {fileID: 212786719886848300}
   - component: {fileID: 61388033378136466}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: PlayerSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 4627515677107842}
   - component: {fileID: 114996546343963280}
   - component: {fileID: 61298458833430704}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -134,9 +134,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minPos: 2
-  maxPos: 15
+  maxPos: 16
   speed: 2
   stikeDistance: 1.5
+  coolDownRateInSeconds: 0.1
+  walkDistance: 0
+  enemyCheckDistance: 1
   escapeNumber: 20
   damage: 10
   hp: 50

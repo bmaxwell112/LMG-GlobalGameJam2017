@@ -253,7 +253,8 @@ MonoBehaviour:
   - {fileID: 1245115096084110, guid: 89510a561072a5346a68fe55949fe00f, type: 2}
   - {fileID: 1999989822873170, guid: 8272b0791c7460a42a92b6a95c2cb407, type: 2}
   - {fileID: 1777806518488686, guid: 967389b9f805abf45a25490287b867d6, type: 2}
-  spawnRate: 1
+  spawnRate: 
+  spawnTime: 
 --- !u!1 &1191772138 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1887737584185890, guid: d014ff63aef713b4ba76cdb00dbb1a37,
@@ -327,6 +328,10 @@ Prefab:
     - target: {fileID: 4974596685269442, guid: 89510a561072a5346a68fe55949fe00f, type: 2}
       propertyPath: m_RootOrder
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1245115096084110, guid: 89510a561072a5346a68fe55949fe00f, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 89510a561072a5346a68fe55949fe00f, type: 2}
@@ -512,6 +517,16 @@ Prefab:
     - target: {fileID: 4627515677107842, guid: 0de98ea2b6053b94996dd34f49db1fda, type: 2}
       propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114996546343963280, guid: 0de98ea2b6053b94996dd34f49db1fda,
+        type: 2}
+      propertyPath: enemyCheckDistance
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114996546343963280, guid: 0de98ea2b6053b94996dd34f49db1fda,
+        type: 2}
+      propertyPath: maxPos
+      value: 16
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0de98ea2b6053b94996dd34f49db1fda, type: 2}

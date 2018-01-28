@@ -5,15 +5,15 @@ using UnityEngine;
 public class EnemyAI : MonoBehaviour {
 
     public int hp, attack;
-    public float speed, attackRateInSeconds;
+    public float speed, attackRateInSeconds, destoryTimeFromDeath, attackDistance;
     public GameObject number;
 
-    private float speedVariance, deathTime;
+    private float speedVariance, deathTime, hitTime;
     private PlayerController player;
     private BarricadeManager barricade;
     private int colliding = 0;
-
-    private bool attacked, dead;
+    [HideInInspector]
+    public bool attacked, dead, knockback;
 
     void Start()
     {
@@ -26,10 +26,9 @@ public class EnemyAI : MonoBehaviour {
     // Update is called once per frame
     void Update ()
     {
-        //if (!dead) { MovementAndAttack(); }   
         if (dead)
         {
-            if (Time.time >= deathTime + 15)
+            if (Time.time >= deathTime + destoryTimeFromDeath)
             {
                 transform.localScale += Vector3.down * Time.deltaTime;
                 if(transform.localScale.y <= 0)
@@ -39,9 +38,19 @@ public class EnemyAI : MonoBehaviour {
                 
             }
         }
+
         if(colliding == 0 && !dead)
         {
             Move();
+        }
+
+        if (knockback)
+        {
+            transform.position += (Vector3.right * 2) * Time.deltaTime;
+            if (Time.time >= hitTime + 0.4f)
+            {
+                knockback = false;
+            }
         }
     }
 
@@ -74,18 +83,15 @@ public class EnemyAI : MonoBehaviour {
         {
             colliding--;
         }
+
     }
 
 
     private void Move()
     {
-        if (transform.position.x > player.transform.position.x + 0.3)
+        if (transform.position.x > player.transform.position.x + attackDistance)
         {
             transform.position -= new Vector3(speedVariance, 0, 0) * Time.deltaTime;
-        }
-        else if (transform.position.x < player.transform.position.x - 0.1)
-        {
-            transform.position += new Vector3(speedVariance, 0, 0) * Time.deltaTime;
         }
     }
 
@@ -113,8 +119,13 @@ public class EnemyAI : MonoBehaviour {
     {
         hp -= damage;        
         if (hp <= 0)
-        {
+        {           
             Dead();
+        }
+        else
+        {
+            hitTime = Time.time;
+            knockback = true;
         }
     }
 

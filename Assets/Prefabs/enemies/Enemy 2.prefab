@@ -53,7 +53,7 @@ Transform:
   m_GameObject: {fileID: 1471610334401702}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1.5, z: 0}
-  m_LocalScale: {x: 4, y: 15, z: 1}
+  m_LocalScale: {x: 2.5, y: 2.5, z: 1}
   m_Children: []
   m_Father: {fileID: 4927887089572988}
   m_RootOrder: 0
@@ -65,7 +65,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1777806518488686}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 8.448278, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4708255911867692}
@@ -106,7 +106,7 @@ Animator:
   m_GameObject: {fileID: 1777806518488686}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: bf278a10d2380d34a89e829c93351827, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -129,7 +129,12 @@ MonoBehaviour:
   attack: 10
   speed: 3
   attackRateInSeconds: 1
+  destoryTimeFromDeath: 0.5
+  attackDistance: 0.3
   number: {fileID: 1774551873252190, guid: 93a8d497658ff7d45adc525b9a31f453, type: 2}
+  attacked: 0
+  dead: 0
+  knockback: 0
 --- !u!212 &212672671577096328
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -164,9 +169,9 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  m_Color: {r: 0, g: 0.13103437, b: 1, a: 1}
-  m_FlipX: 0
+  m_Sprite: {fileID: 21300000, guid: e4474334f35d72b45aad1df0c6dd29a4, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 0.16, y: 0.16}
