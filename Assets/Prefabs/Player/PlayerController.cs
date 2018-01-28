@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,17 +13,19 @@ public class PlayerController : MonoBehaviour {
     private int buttonPressed = 0;
     private LevelManager lvl;
     private BarricadeManager BarricadeReference;
+    private SpriteRenderer sprite;
 
     private void Start()
     {
         lvl = FindObjectOfType<LevelManager>();
         BarricadeReference = GameObject.FindWithTag("Barricade").GetComponent<BarricadeManager>();
+        sprite = GetComponentInChildren<SpriteRenderer>();
     }
 
     // Update is called once per frame
     void Update () {
         youShallNotPass = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y), (Vector2.right / 10), enemyCheckDistance);
-        InputCheck();        
+        InputCheck();
     }
 
     void InputCheck()
@@ -31,11 +34,13 @@ public class PlayerController : MonoBehaviour {
         {
             transform.position += new Vector3(-speed, 0, 0) * Time.deltaTime;
             left = true;
+            sprite.flipX = true;
         }
         if (Input.GetKey(KeyCode.RightArrow) && transform.position.x <= maxPos && !youShallNotPass)
         {
             transform.position += new Vector3(speed, 0, 0) * Time.deltaTime;
             left = false;
+            sprite.flipX = false;
         }
         
         if (Input.GetKeyDown(KeyCode.Space) && !left)
@@ -98,6 +103,11 @@ public class PlayerController : MonoBehaviour {
         {
             lvl.LoadLevel("03b Lose");
         }
+        else
+        {
+            sprite.color = Color.red;
+            Invoke("ColorReset", 0.25f);
+        }
     }
 
     void SpawnNumber(int value, Vector3 spawnPos)
@@ -110,5 +120,9 @@ public class PlayerController : MonoBehaviour {
     void AttackCoolDown()
     {
         coolDown = false;
+    }
+    void ColorReset()
+    {
+        sprite.color = Color.white;
     }
 }

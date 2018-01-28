@@ -8,7 +8,7 @@ public class AnimationRobot : MonoBehaviour {
 
     private Animator anim;
     private EnemyAI ai;
-    private bool triggered, dead;
+    private bool triggered, dead, attacking;
 
 	// Use this for initialization
 	void Start () {
@@ -18,23 +18,24 @@ public class AnimationRobot : MonoBehaviour {
 
     void Update()
     {
+        anim.SetBool("attack", attacking);
         if(ai.attacked && !triggered)
         {
-            anim.SetTrigger("attack");
-            triggered = true;
+            attacking = true;
         }
         if (!ai.attacked && triggered)
         {
-            triggered = false;
+            attacking = false;
         }
         if (ai.hp <= 0 && !dead)
         {
+            attacking = false;
             CreateSmoke();
             dead = true;
         }
-        if(ai.knockback)
+        if(ai.knockback && attacking)
         {
-            anim.SetTrigger("stopAttack");
+            attacking = false;                      
         }
     }
 

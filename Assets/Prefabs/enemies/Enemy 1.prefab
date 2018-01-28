@@ -126,7 +126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c4b961492f8e3c4e9bb6eec20421cb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explode: {fileID: 0}
+  explode: {fileID: 1434375386744820, guid: 64daa429b6d300e41bab42aab150d8b7, type: 2}
 --- !u!114 &114291202924487866
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -138,7 +138,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3daccf1925f52bc4093eb911c97c8f9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 20
+  hp: 30
   attack: 20
   speed: 2
   attackRateInSeconds: 2

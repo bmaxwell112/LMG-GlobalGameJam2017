@@ -125,11 +125,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3daccf1925f52bc4093eb911c97c8f9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 10
+  hp: 20
   attack: 10
   speed: 1
   attackRateInSeconds: 1
+  destoryTimeFromDeath: 5
+  attackDistance: 0.2
   number: {fileID: 1774551873252190, guid: 93a8d497658ff7d45adc525b9a31f453, type: 2}
+  attacked: 0
+  dead: 0
+  knockback: 0
 --- !u!212 &212036303245170916
 SpriteRenderer:
   m_ObjectHideFlags: 1

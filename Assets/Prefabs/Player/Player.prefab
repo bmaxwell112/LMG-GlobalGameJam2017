@@ -36,6 +36,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4627515677107842}
   - component: {fileID: 114996546343963280}
+  - component: {fileID: 95692796742763822}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -65,11 +66,28 @@ Transform:
   m_GameObject: {fileID: 1549779373674422}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5, y: 20, z: 1}
+  m_LocalScale: {x: 2.5, y: 2.5, z: 1}
   m_Children: []
   m_Father: {fileID: 4627515677107842}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &95692796742763822
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1999021945939832}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 95bf5081600b1e8458db18e4a2b93dad, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &114996546343963280
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -83,11 +101,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minPos: 2
   maxPos: 15
-  speed: 2
+  speed: 2.5
   stikeDistance: 1.5
   coolDownRateInSeconds: 0.1
   walkDistance: 0
-  enemyCheckRadius: 0.25
+  enemyCheckDistance: 0.25
   escapeNumber: 20
   damage: 10
   hp: 50
@@ -126,7 +144,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300002, guid: b0d34d7ad35a6eb4f97091f263064c32, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
