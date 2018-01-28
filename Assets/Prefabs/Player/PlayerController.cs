@@ -114,9 +114,8 @@ public class PlayerController : MonoBehaviour {
     {
         if(!coolDown)
         {
-            LayerMask mask = 2;
             RaycastHit2D hit = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y), (Vector2.right/10), stikeDistance);
-            
+            Debug.Log(hit.collider.gameObject);
             if (hit)
             {      
                 if(hit.collider.gameObject.CompareTag("enemy"))
