@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour {
     public float minPos, maxPos, speed, stikeDistance, coolDownRateInSeconds, walkDistance;
     public int escapeNumber, damage, hp;
     public GameObject number, controlPanel, teleport;
+    public AudioClip punchHit, punchMiss, punchButton;
+    public AudioClip[] hurtSound;
 
     private bool left, coolDown, youShallNotPass, win;
     private int buttonPressed = 0;
@@ -15,16 +17,20 @@ public class PlayerController : MonoBehaviour {
     private BarricadeManager BarricadeReference;
     private SpriteRenderer sprite;
     private Animator anim, button;
-    private AudioClip punchHit, punchMiss;
-    private AudioClip[] hurtSound;
+    private AudioSource audioSource;
+    private float volume;
+
 
     private void Start()
     {
+        GameManager.volume = PlayerPrefsManager.GetSFXVolume();
         lvl = FindObjectOfType<LevelManager>();
         BarricadeReference = GameObject.FindWithTag("Barricade").GetComponent<BarricadeManager>();
         sprite = GetComponentInChildren<SpriteRenderer>();
         anim = GetComponent<Animator>();
         button = controlPanel.GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
+        audioSource.volume = GameManager.volume;
     }
 
     void OnTriggerEnter2D(Collider2D coll)
@@ -89,6 +95,7 @@ public class PlayerController : MonoBehaviour {
         if (!coolDown && !win)
         {
             buttonPressed++;
+            PlayAudio(punchButton);
             SpawnNumber(buttonPressed, transform.position);
             if (buttonPressed >= escapeNumber)
             {
@@ -121,12 +128,14 @@ public class PlayerController : MonoBehaviour {
                 if(hit.collider.gameObject.CompareTag("enemy"))
                 {
                     print("hit enemy");
+                    PlayAudio(punchHit);
                     hit.collider.gameObject.GetComponent<EnemyAI>().DamageEnemy(damage);
                     SpawnNumber(damage, hit.collider.gameObject.transform.position);                    
                 }                        
             }
             else
             {
+                PlayAudio(punchMiss);
                 if (transform.position.x >= maxPos - 0.2f)
                 {
                     print("build barricade");
@@ -149,6 +158,8 @@ public class PlayerController : MonoBehaviour {
         }
         else
         {
+            int rand = UnityEngine.Random.Range(0, 5);
+            PlayAudio(hurtSound[rand]);
             sprite.color = Color.red;
             Invoke("ColorReset", 0.25f);
         }
@@ -169,5 +180,10 @@ public class PlayerController : MonoBehaviour {
     void ColorReset()
     {
         sprite.color = Color.white;
+    }
+    void PlayAudio(AudioClip thisClip)
+    {
+        audioSource.clip = thisClip;
+        audioSource.Play();
     }
 }
