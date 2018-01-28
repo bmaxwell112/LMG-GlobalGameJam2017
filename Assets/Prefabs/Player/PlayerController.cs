@@ -132,15 +132,16 @@ public class PlayerController : MonoBehaviour {
                     hit.collider.gameObject.GetComponent<EnemyAI>().DamageEnemy(damage);
                     SpawnNumber(damage, hit.collider.gameObject.transform.position);                    
                 }                        
-            }
-            else
-            {
-                PlayAudio(punchMiss);
-                if (transform.position.x >= maxPos - 0.2f)
+
+                if(hit.collider.gameObject.tag == "Barricade")
                 {
                     print("build barricade");
                     BarricadeReference.BuildBarricade();
                 }
+            }
+            else
+            {
+                PlayAudio(punchMiss);
                 youShallNotPass = false;
             }
             coolDown = true;
