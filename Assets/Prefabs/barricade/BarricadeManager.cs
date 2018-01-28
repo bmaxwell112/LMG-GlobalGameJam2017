@@ -46,7 +46,7 @@ public class BarricadeManager : MonoBehaviour {
 
     public void BuildBarricade()
     {
-        health = 150;
+        health = 100;
     }
 
     public void TakeDamage(int damage)
