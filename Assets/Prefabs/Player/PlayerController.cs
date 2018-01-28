@@ -7,14 +7,14 @@ public class PlayerController : MonoBehaviour {
 
     public float minPos, maxPos, speed, stikeDistance, coolDownRateInSeconds, walkDistance;
     public int escapeNumber, damage, hp;
-    public GameObject number;
+    public GameObject number, controlPanel;
 
     private bool left, coolDown, youShallNotPass;
     private int buttonPressed = 0;
     private LevelManager lvl;
     private BarricadeManager BarricadeReference;
     private SpriteRenderer sprite;
-    private Animator anim;
+    private Animator anim, button;
 
     private void Start()
     {
@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour {
         BarricadeReference = GameObject.FindWithTag("Barricade").GetComponent<BarricadeManager>();
         sprite = GetComponentInChildren<SpriteRenderer>();
         anim = GetComponent<Animator>();
+        button = controlPanel.GetComponent<Animator>();
     }
 
     void OnTriggerStay2D(Collider2D coll)
@@ -89,6 +90,7 @@ public class PlayerController : MonoBehaviour {
             {
                 lvl.LoadLevel("03a Win");
             }
+            button.SetTrigger("press");
             coolDown = true;
             anim.SetInteger("animState", 2);
             Invoke("AttackCoolDown", coolDownRateInSeconds);

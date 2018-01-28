@@ -5,14 +5,16 @@ using UnityEngine;
 public class BarricadeManager : MonoBehaviour {
     
     public int health;
-    private BoxCollider2D collisionBox;
+    public Sprite open, close;
+    public GameObject door;
+    private BoxCollider2D collisionBox;    
 
     public Sprite[] imageArray;
 
 	// Use this for initialization
 	void Start () {
         collisionBox = GetComponent<BoxCollider2D>();
-	}
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -33,5 +35,16 @@ public class BarricadeManager : MonoBehaviour {
     public void TakeDamage(int damage)
     {
         health = health - damage;
+    }
+
+    void DoorOpenAnim()
+    {
+        door.transform.localPosition = new Vector3(-1.05f, 4.8f, 0);
+        door.GetComponent<SpriteRenderer>().sprite = open;
+    }
+    void DoorCloseAnim()
+    {
+        door.transform.localPosition = new Vector3(0, 2.95f, 0);
+        door.GetComponent<SpriteRenderer>().sprite = close;
     }
 }

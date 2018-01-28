@@ -51,8 +51,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1741961518601468}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.8, z: 0}
-  m_LocalScale: {x: 8.18, y: 40, z: 1}
+  m_LocalPosition: {x: -1.04, y: 4.79, z: 0}
+  m_LocalScale: {x: 4.5, y: 4.5, z: 1}
   m_Children: []
   m_Father: {fileID: 4494820007505806}
   m_RootOrder: 0
@@ -63,8 +63,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1287392187643352}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 15.85, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 15.25, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4327050301963480}
@@ -108,6 +108,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 0
+  open: {fileID: 21300000, guid: 104d3635d619b194f813af3bc5960af1, type: 3}
+  close: {fileID: 21300000, guid: 8a1c17165c7c2ce4bb299c6269595429, type: 3}
+  door: {fileID: 1741961518601468}
   imageArray:
   - {fileID: 0}
 --- !u!212 &212585794608900040
@@ -144,9 +147,9 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
-  m_Color: {r: 0.23875433, g: 0.7058823, b: 0.31929365, a: 1}
-  m_FlipX: 0
+  m_Sprite: {fileID: 21300000, guid: 8a1c17165c7c2ce4bb299c6269595429, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 0.16, y: 0.16}
