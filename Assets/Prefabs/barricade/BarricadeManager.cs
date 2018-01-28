@@ -24,6 +24,7 @@ public class BarricadeManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        print(health);
         if (health > 50)
         {
             doorImage.GetComponent<SpriteRenderer>().enabled = false;
@@ -31,13 +32,13 @@ public class BarricadeManager : MonoBehaviour {
         {
             doorImage.GetComponent<SpriteRenderer>().enabled = true;
             doorImage.GetComponent<SpriteRenderer>().sprite = doorImages[0];
-            doorImage.transform.localPosition = new Vector3(-1.46f, 1.95f, 0f);
+            doorImage.transform.localPosition = new Vector3(-1f, 2.95f, 0f);
             doorImage.transform.localScale = new Vector3(4.5f, 5f, 1f);
         }
         else if (health <= 0 && doorImage.GetComponent<SpriteRenderer>().enabled == true)
         {
             doorImage.GetComponent<SpriteRenderer>().sprite = doorImages[1];
-            doorImage.transform.localPosition = new Vector3(-1.75f, 2.35f, 0f);
+            doorImage.transform.localPosition = new Vector3(-1.75f, 3.5f, 0f);
             doorImage.transform.localScale = new Vector3(4.5f, 4.5f, 1f);
             PlayAudio(doorOpen);
         }
@@ -45,7 +46,7 @@ public class BarricadeManager : MonoBehaviour {
 
     public void BuildBarricade()
     {
-        health = 100;
+        health = 150;
     }
 
     public void TakeDamage(int damage)

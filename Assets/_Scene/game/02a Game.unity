@@ -794,6 +794,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 2109424489}
     m_Modifications:
+    - target: {fileID: 114755348699006220, guid: 28a3c41faa2b89c4289dbe39901eece1,
+        type: 2}
+      propertyPath: doorImages.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4494820007505806, guid: 28a3c41faa2b89c4289dbe39901eece1, type: 2}
       propertyPath: m_LocalPosition.x
       value: 15.25
@@ -829,7 +834,7 @@ Prefab:
     - target: {fileID: 212585794608900040, guid: 28a3c41faa2b89c4289dbe39901eece1,
         type: 2}
       propertyPath: m_SortingOrder
-      value: 5
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 212585794608900040, guid: 28a3c41faa2b89c4289dbe39901eece1,
         type: 2}
@@ -843,7 +848,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4327050301963480, guid: 28a3c41faa2b89c4289dbe39901eece1, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 2.35
+      value: 3.91
       objectReference: {fileID: 0}
     - target: {fileID: 114755348699006220, guid: 28a3c41faa2b89c4289dbe39901eece1,
         type: 2}
@@ -855,6 +860,28 @@ Prefab:
       propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 82753991190922004, guid: 28a3c41faa2b89c4289dbe39901eece1,
+        type: 2}
+      propertyPath: panLevelCustomCurve.m_RotationOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 82753991190922004, guid: 28a3c41faa2b89c4289dbe39901eece1,
+        type: 2}
+      propertyPath: reverbZoneMixCustomCurve.m_RotationOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114755348699006220, guid: 28a3c41faa2b89c4289dbe39901eece1,
+        type: 2}
+      propertyPath: doorImages.Array.data[1]
+      value: 
+      objectReference: {fileID: 21300000, guid: 8a1c17165c7c2ce4bb299c6269595429,
+        type: 3}
+    - target: {fileID: 114755348699006220, guid: 28a3c41faa2b89c4289dbe39901eece1,
+        type: 2}
+      propertyPath: doorImages.Array.data[0]
+      value: 
+      objectReference: {fileID: 21300000, guid: 0382ba203bceadd498a115d7bf9ce1b3,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 28a3c41faa2b89c4289dbe39901eece1, type: 2}
   m_IsPrefabParent: 0
