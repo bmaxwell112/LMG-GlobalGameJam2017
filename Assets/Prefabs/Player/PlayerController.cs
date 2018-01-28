@@ -25,12 +25,10 @@ public class PlayerController : MonoBehaviour {
         button = controlPanel.GetComponent<Animator>();
     }
 
-    void OnTriggerStay2D(Collider2D coll)
+    void OnTriggerEnter2D(Collider2D coll)
     {
-        if (coll.gameObject.tag == "enemy")
-        {
-            youShallNotPass = true;
-        }
+        if(coll.gameObject.tag == "enemy")
+        youShallNotPass = true;
     }
 
     void OnTriggerExit2D(Collider2D coll)
@@ -115,7 +113,6 @@ public class PlayerController : MonoBehaviour {
         if(!coolDown)
         {
             RaycastHit2D hit = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y), (Vector2.right/10), stikeDistance);
-            Debug.Log(hit.collider.gameObject);
             if (hit)
             {      
                 if(hit.collider.gameObject.CompareTag("enemy"))
