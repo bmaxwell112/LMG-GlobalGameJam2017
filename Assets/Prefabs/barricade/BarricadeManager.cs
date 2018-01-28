@@ -5,7 +5,6 @@ using UnityEngine;
 public class BarricadeManager : MonoBehaviour {
     
     public int health;
-    public Sprite open, close;
     public GameObject door;
     private BoxCollider2D collisionBox;    
 
@@ -35,16 +34,5 @@ public class BarricadeManager : MonoBehaviour {
     public void TakeDamage(int damage)
     {
         health = health - damage;
-    }
-
-    void DoorOpenAnim()
-    {
-        door.transform.localPosition = new Vector3(-1.05f, 4.8f, 0);
-        door.GetComponent<SpriteRenderer>().sprite = open;
-    }
-    void DoorCloseAnim()
-    {
-        door.transform.localPosition = new Vector3(0, 2.95f, 0);
-        door.GetComponent<SpriteRenderer>().sprite = close;
     }
 }

@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - enemy
+  - Barricade
+  - ControlPanel
   layers:
   - Default
   - TransparentFX

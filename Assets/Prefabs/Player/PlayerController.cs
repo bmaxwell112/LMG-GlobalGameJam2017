@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour {
     public int escapeNumber, damage, hp;
     public GameObject number, controlPanel;
 
-    private bool left, coolDown, youShallNotPass;
+    private bool left, coolDown, youShallNotPass, win;
     private int buttonPressed = 0;
     private LevelManager lvl;
     private BarricadeManager BarricadeReference;
@@ -65,18 +65,22 @@ public class PlayerController : MonoBehaviour {
             sprite.flipX = false;
             anim.SetInteger("animState", 1);
         }
-        
+
         if (Input.GetKeyDown(KeyCode.Space) && !left && !Input.GetKey(KeyCode.RightArrow) && !Input.GetKey(KeyCode.LeftArrow))
         {
-            AttackOrBarricade();            
+            AttackOrBarricade();
         }
         else if (Input.GetKeyDown(KeyCode.Space) && left && transform.position.x <= minPos + 0.5)
         {
             ControlPanelPressed();
         }
-        if(Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.LeftArrow))
+        if (Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.LeftArrow))
         {
             anim.SetInteger("animState", 0);
+        }
+        if (win)
+        {
+            WinFunction();
         }
     }
 
@@ -88,12 +92,21 @@ public class PlayerController : MonoBehaviour {
             SpawnNumber(buttonPressed, transform.position);
             if (buttonPressed >= escapeNumber)
             {
-                lvl.LoadLevel("03a Win");
+                win = true;
             }
             button.SetTrigger("press");
             coolDown = true;
             anim.SetInteger("animState", 2);
             Invoke("AttackCoolDown", coolDownRateInSeconds);
+        }
+    }
+
+    void WinFunction()
+    {
+        sprite.color -= new Color(0, 0, 0, 1) * Time.deltaTime;
+        if (sprite.color.a <= 0)
+        {
+            lvl.LoadLevel("03a Win");
         }
     }
 
