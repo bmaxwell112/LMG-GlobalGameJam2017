@@ -93,15 +93,16 @@ public class EnemyAI : MonoBehaviour {
         {
             colliding = 0;
         }
-
+        attacked = false;
     }
 
 
     private void Move()
-    {
+    {        
         if (transform.position.x > player.transform.position.x + attackDistance)
         {
             transform.position -= new Vector3(speedVariance, 0, 0) * Time.deltaTime;
+            attacked = false;
         }
     }
 

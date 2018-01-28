@@ -10,14 +10,16 @@ public class PlayerController : MonoBehaviour {
     public GameObject number, controlPanel, teleport;
     public AudioClip punchHit, punchMiss, punchButton;
     public AudioClip[] hurtSound;
+    [HideInInspector]
+    public int buttonPressed = 0;
 
-    private bool left, coolDown, youShallNotPass, win;
-    private int buttonPressed = 0;
+    private bool left, coolDown, youShallNotPass, win;    
     private LevelManager lvl;
     private BarricadeManager BarricadeReference;
     private SpriteRenderer sprite;
     private Animator anim, button;
     private AudioSource audioSource;
+    private ControlPanel cPanel;
     private float volume;
 
 
@@ -31,6 +33,7 @@ public class PlayerController : MonoBehaviour {
         button = controlPanel.GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
         audioSource.volume = GameManager.volume;
+        cPanel = FindObjectOfType<ControlPanel>();
     }
 
     void OnTriggerEnter2D(Collider2D coll)
@@ -78,7 +81,10 @@ public class PlayerController : MonoBehaviour {
         }
         else if (Input.GetKeyDown(KeyCode.Space) && left && transform.position.x <= minPos + 0.5)
         {
-            ControlPanelPressed();
+            if (cPanel.active)
+            {
+                ControlPanelPressed();
+            }
         }
         if (Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.LeftArrow))
         {
@@ -187,5 +193,5 @@ public class PlayerController : MonoBehaviour {
     {
         audioSource.clip = thisClip;
         audioSource.Play();
-    }
+    }   
 }

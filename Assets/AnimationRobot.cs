@@ -18,24 +18,20 @@ public class AnimationRobot : MonoBehaviour {
 
     void Update()
     {
-        anim.SetBool("attack", attacking);
-        if(ai.attacked && !triggered)
-        {
-            attacking = true;
-        }
-        if (!ai.attacked && triggered)
-        {
-            attacking = false;
-        }
+        anim.SetBool("attack", ai.attacked);
+        //if(ai.attacked && !triggered)
+        //{
+        //    attacking = true;
+        //}
+        //if (!ai.attacked && triggered)
+        //{
+        //    attacking = false;
+        //}
         if (ai.hp <= 0 && !dead)
         {
             attacking = false;
             CreateSmoke();
             dead = true;
-        }
-        if(ai.knockback && attacking)
-        {
-            attacking = false;                      
         }
     }
 
