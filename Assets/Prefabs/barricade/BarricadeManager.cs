@@ -7,32 +7,36 @@ public class BarricadeManager : MonoBehaviour {
     public int health;
     public GameObject door;
     private BoxCollider2D collisionBox;    
-
-    public Sprite[] imageArray;
+    private GameObject doorImage;
 
 	// Use this for initialization
 	void Start () {
         collisionBox = GetComponent<BoxCollider2D>();
+        doorImage = transform.GetChild(0).gameObject;
     }
 	
 	// Update is called once per frame
 	void Update () {
-		if(health == 0)
+		if(health <= 0)
         {
-            collisionBox.enabled = false;
+            doorImage.GetComponent<SpriteRenderer>().enabled = true;
         }else
         {
-            collisionBox.enabled = true;
+            doorImage.GetComponent<SpriteRenderer>().enabled = false;
         }
 	}
 
     public void BuildBarricade()
     {
-        health++;
+        health = 100;
     }
 
     public void TakeDamage(int damage)
     {
-        health = health - damage;
+        health -= damage;
+        if(health - damage <= 0)
+        {
+            health = 0;
+        }
     }
 }

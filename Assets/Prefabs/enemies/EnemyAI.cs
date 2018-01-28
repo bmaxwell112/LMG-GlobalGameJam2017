@@ -62,7 +62,7 @@ public class EnemyAI : MonoBehaviour {
 
    void OnTriggerEnter2D(Collider2D coll)
     {
-        if(coll.gameObject.tag == "Player" || coll.gameObject.tag == "barricade")
+        if(coll.gameObject.tag == "Player" || coll.gameObject.tag == "Barricade")
         {
             colliding++;
             if (!attacked)
@@ -74,18 +74,23 @@ public class EnemyAI : MonoBehaviour {
 
     void OnTriggerStay2D(Collider2D coll)
     {
-        if ((coll.gameObject.tag == "Player" || coll.gameObject.tag == "barricade") && !attacked)
+        if ((coll.gameObject.tag == "Player" || coll.gameObject.tag == "Barricade") && !attacked)
         {
             EnemyAttack(coll.gameObject.tag);
+        }
+
+        if(coll.gameObject.tag == "Barricade" && coll.gameObject.GetComponent<BarricadeManager>().health == 0)
+        {
+            colliding = 0;
         }
     }
 
     void OnTriggerExit2D(Collider2D coll)
     {
         Debug.Log("exit");
-        if(coll.gameObject.tag == "Player" || coll.gameObject.tag == "barricade")
+        if(coll.gameObject.tag == "Player" || coll.gameObject.tag == "Barricade")
         {
-            colliding--;
+            colliding = 0;
         }
 
     }
@@ -111,7 +116,7 @@ public class EnemyAI : MonoBehaviour {
             player.DamagePlayer(attack);
             SpawnNumber(attack, player.transform.position);
         }
-        if(tag == "barricade")
+        if(tag == "Barricade")
         {
             barricade.TakeDamage(attack);
             SpawnNumber(attack, barricade.transform.position);
