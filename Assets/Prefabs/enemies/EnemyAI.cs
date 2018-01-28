@@ -72,6 +72,14 @@ public class EnemyAI : MonoBehaviour {
         }
     }
 
+    void OnTriggerStay2D(Collider2D coll)
+    {
+        if ((coll.gameObject.tag == "Player" || coll.gameObject.tag == "barricade") && !attacked)
+        {
+            EnemyAttack(coll.gameObject.tag);
+        }
+    }
+
     void OnTriggerExit2D(Collider2D coll)
     {
         Debug.Log("exit");
@@ -94,7 +102,6 @@ public class EnemyAI : MonoBehaviour {
     void AttackDelay()
     {
         Debug.Log("attacked is false");
-        boxCollider.enabled = true;
         attacked = false;
     }
     void EnemyAttack(string tag)
@@ -110,7 +117,6 @@ public class EnemyAI : MonoBehaviour {
             SpawnNumber(attack, barricade.transform.position);
         }
         attacked = true;
-        boxCollider.enabled = false;
         Invoke("AttackDelay", attackRateInSeconds);
     }
 
