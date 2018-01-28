@@ -15,6 +15,8 @@ public class PlayerController : MonoBehaviour {
     private BarricadeManager BarricadeReference;
     private SpriteRenderer sprite;
     private Animator anim, button;
+    private AudioClip punchHit, punchMiss;
+    private AudioClip[] hurtSound;
 
     private void Start()
     {
@@ -25,12 +27,10 @@ public class PlayerController : MonoBehaviour {
         button = controlPanel.GetComponent<Animator>();
     }
 
-    void OnTriggerStay2D(Collider2D coll)
+    void OnTriggerEnter2D(Collider2D coll)
     {
-        if (coll.gameObject.tag == "enemy")
-        {
-            youShallNotPass = true;
-        }
+        if(coll.gameObject.tag == "enemy")
+        youShallNotPass = true;
     }
 
     void OnTriggerExit2D(Collider2D coll)
@@ -115,9 +115,7 @@ public class PlayerController : MonoBehaviour {
     {
         if(!coolDown)
         {
-            LayerMask mask = 2;
-            RaycastHit2D hit = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y), (Vector2.right/10), stikeDistance);
-            
+            RaycastHit2D hit = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y), (Vector2.right/30), stikeDistance);
             if (hit)
             {      
                 if(hit.collider.gameObject.CompareTag("enemy"))

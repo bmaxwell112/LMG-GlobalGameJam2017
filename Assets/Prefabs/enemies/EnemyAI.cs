@@ -14,6 +14,7 @@ public class EnemyAI : MonoBehaviour {
     private BarricadeManager barricade;
     private int colliding = 0;
     private AudioSource audioSource;
+    private BoxCollider2D boxCollider;
     [HideInInspector]
     public bool attacked, dead, knockback;
 
@@ -24,6 +25,7 @@ public class EnemyAI : MonoBehaviour {
         player = FindObjectOfType<PlayerController>();
         barricade = FindObjectOfType<BarricadeManager>();
         audioSource = GetComponent<AudioSource>();
+        boxCollider = GetComponent<BoxCollider2D>();
     }
 
     // Update is called once per frame
@@ -55,6 +57,7 @@ public class EnemyAI : MonoBehaviour {
                 knockback = false;
             }
         }
+
     }
 
    void OnTriggerEnter2D(Collider2D coll)
@@ -69,19 +72,9 @@ public class EnemyAI : MonoBehaviour {
         }
     }
 
-    void OnTriggerStay2D(Collider2D other)
-    {
-        if(other.gameObject.tag == "Player" || other.gameObject.tag == "barricade")
-        {
-            if (!attacked)
-            {
-                EnemyAttack(other.gameObject.tag);
-            }
-        }
-    }
-
     void OnTriggerExit2D(Collider2D coll)
     {
+        Debug.Log("exit");
         if(coll.gameObject.tag == "Player" || coll.gameObject.tag == "barricade")
         {
             colliding--;
@@ -100,6 +93,8 @@ public class EnemyAI : MonoBehaviour {
 
     void AttackDelay()
     {
+        Debug.Log("attacked is false");
+        boxCollider.enabled = true;
         attacked = false;
     }
     void EnemyAttack(string tag)
@@ -109,12 +104,13 @@ public class EnemyAI : MonoBehaviour {
             player.DamagePlayer(attack);
             SpawnNumber(attack, player.transform.position);
         }
-        if(tag == "Barricade")
+        if(tag == "barricade")
         {
             barricade.TakeDamage(attack);
             SpawnNumber(attack, barricade.transform.position);
         }
         attacked = true;
+        boxCollider.enabled = false;
         Invoke("AttackDelay", attackRateInSeconds);
     }
 
