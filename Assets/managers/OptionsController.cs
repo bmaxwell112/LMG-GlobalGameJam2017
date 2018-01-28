@@ -19,25 +19,35 @@ public class OptionsController : MonoBehaviour {
 
 	private GameObject confirmReset;
 	private MusicManager musicManager;
+    private AudioSource audioSource;
+    private float sfxChangeCheck;    
 
 	// Use this for initialization
 	void Start () {
 		musicManager = FindObjectOfType<MusicManager>();
+        audioSource = GetComponent<AudioSource>();
 		Debug.Log(musicManager);		
 		volumeSlider.value = PlayerPrefsManager.GetMasterVolume();
-		sfxVolumeSlider.value = PlayerPrefsManager.GetSFXVolume();		
-		confirmReset = GameObject.Find("ConfirmReset");
+		sfxVolumeSlider.value = PlayerPrefsManager.GetSFXVolume();
+        sfxChangeCheck = sfxVolumeSlider.value;
+        confirmReset = GameObject.Find("ConfirmReset");
         if (confirmReset)
         {
             confirmReset.SetActive(false);
         }
-	}
+    }
 	
 	// Update is called once per frame
 	void Update () {
 		musicManager.ChangeVolume (volumeSlider.value);	
 		PlayerPrefsManager.SetMasterVolume (volumeSlider.value);
 		PlayerPrefsManager.SetSFXVolume(sfxVolumeSlider.value);
+        if(Input.GetMouseButtonUp(0) && sfxChangeCheck != sfxVolumeSlider.value)
+        {            
+            audioSource.volume = sfxVolumeSlider.value;
+            audioSource.Play();
+            sfxChangeCheck = sfxVolumeSlider.value;        
+        }
 	}
 	
 	// Used on the exit button for the scene
