@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour {
 
     public float minPos, maxPos, speed, stikeDistance, coolDownRateInSeconds, walkDistance;
     public int escapeNumber, damage, hp;
-    public GameObject number, controlPanel;
+    public GameObject number, controlPanel, teleport;
 
     private bool left, coolDown, youShallNotPass, win;
     private int buttonPressed = 0;
@@ -86,12 +86,13 @@ public class PlayerController : MonoBehaviour {
 
     private void ControlPanelPressed()
     {
-        if (!coolDown)
+        if (!coolDown && !win)
         {
             buttonPressed++;
             SpawnNumber(buttonPressed, transform.position);
             if (buttonPressed >= escapeNumber)
             {
+                Instantiate(teleport);
                 win = true;
             }
             button.SetTrigger("press");
@@ -103,7 +104,7 @@ public class PlayerController : MonoBehaviour {
 
     void WinFunction()
     {
-        sprite.color -= new Color(0, 0, 0, 1) * Time.deltaTime;
+        sprite.color -= new Color(0, 0, 0, 0.75f) * Time.deltaTime;
         if (sprite.color.a <= 0)
         {
             lvl.LoadLevel("03a Win");

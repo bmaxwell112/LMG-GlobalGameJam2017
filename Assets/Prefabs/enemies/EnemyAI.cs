@@ -7,11 +7,13 @@ public class EnemyAI : MonoBehaviour {
     public int hp, attack;
     public float speed, attackRateInSeconds, destoryTimeFromDeath, attackDistance;
     public GameObject number;
+    public AudioClip deathSound;
 
     private float speedVariance, deathTime, hitTime;
     private PlayerController player;
     private BarricadeManager barricade;
     private int colliding = 0;
+    private AudioSource audioSource;
     [HideInInspector]
     public bool attacked, dead, knockback;
 
@@ -21,6 +23,7 @@ public class EnemyAI : MonoBehaviour {
         speedVariance = speed + rand;
         player = FindObjectOfType<PlayerController>();
         barricade = FindObjectOfType<BarricadeManager>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -119,7 +122,9 @@ public class EnemyAI : MonoBehaviour {
     {
         hp -= damage;        
         if (hp <= 0)
-        {           
+        {
+            audioSource.clip = deathSound;
+            audioSource.Play();
             Dead();
         }
         else

@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4353914860574716}
   - component: {fileID: 198334949584427870}
   - component: {fileID: 199807348346561044}
+  - component: {fileID: 114187605448207482}
   m_Layer: 0
   m_Name: teleportStream
   m_TagString: Untagged
@@ -41,6 +42,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+--- !u!114 &114187605448207482
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1076496504505130}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57ce3d90b7a334445adf576e436b87f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!198 &198334949584427870
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -49,7 +61,7 @@ ParticleSystem:
   m_GameObject: {fileID: 1076496504505130}
   serializedVersion: 5
   lengthInSec: 1
-  simulationSpeed: 1
+  simulationSpeed: 2
   stopAction: 0
   looping: 1
   prewarm: 0

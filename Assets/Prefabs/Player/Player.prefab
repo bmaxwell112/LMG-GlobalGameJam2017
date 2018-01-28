@@ -131,11 +131,12 @@ MonoBehaviour:
   stikeDistance: 1.5
   coolDownRateInSeconds: 0.1
   walkDistance: 0
-  escapeNumber: 100
+  escapeNumber: 50
   damage: 10
   hp: 50
   number: {fileID: 1774551873252190, guid: 93a8d497658ff7d45adc525b9a31f453, type: 2}
   controlPanel: {fileID: 0}
+  teleport: {fileID: 1076496504505130, guid: 6d91980b219d3144abcb0a38bac756e4, type: 2}
 --- !u!212 &212786719886848300
 SpriteRenderer:
   m_ObjectHideFlags: 1
