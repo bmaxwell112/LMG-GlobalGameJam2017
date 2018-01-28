@@ -14,12 +14,14 @@ public class PlayerController : MonoBehaviour {
     private LevelManager lvl;
     private BarricadeManager BarricadeReference;
     private SpriteRenderer sprite;
+    private Animator anim;
 
     private void Start()
     {
         lvl = FindObjectOfType<LevelManager>();
         BarricadeReference = GameObject.FindWithTag("Barricade").GetComponent<BarricadeManager>();
         sprite = GetComponentInChildren<SpriteRenderer>();
+        anim = GetComponent<Animator>();
     }
 
     void OnTriggerStay2D(Collider2D coll)
@@ -50,6 +52,7 @@ public class PlayerController : MonoBehaviour {
             transform.position += new Vector3(-speed, 0, 0) * Time.deltaTime;
             left = true;
             sprite.flipX = true;
+            anim.SetInteger("animState", 1);
         }
         if (Input.GetKey(KeyCode.RightArrow) && transform.position.x <= maxPos)
         {
@@ -59,15 +62,20 @@ public class PlayerController : MonoBehaviour {
             }
             left = false;
             sprite.flipX = false;
+            anim.SetInteger("animState", 1);
         }
         
-        if (Input.GetKeyDown(KeyCode.Space) && !left)
+        if (Input.GetKeyDown(KeyCode.Space) && !left && !Input.GetKey(KeyCode.RightArrow) && !Input.GetKey(KeyCode.LeftArrow))
         {
-            AttackOrBarricade();
+            AttackOrBarricade();            
         }
         else if (Input.GetKeyDown(KeyCode.Space) && left && transform.position.x <= minPos + 0.5)
         {
             ControlPanelPressed();
+        }
+        if(Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.LeftArrow))
+        {
+            anim.SetInteger("animState", 0);
         }
     }
 
@@ -82,6 +90,7 @@ public class PlayerController : MonoBehaviour {
                 lvl.LoadLevel("03a Win");
             }
             coolDown = true;
+            anim.SetInteger("animState", 2);
             Invoke("AttackCoolDown", coolDownRateInSeconds);
         }
     }
@@ -112,6 +121,7 @@ public class PlayerController : MonoBehaviour {
                 youShallNotPass = false;
             }
             coolDown = true;
+            anim.SetInteger("animState", 2);
             Invoke("AttackCoolDown", coolDownRateInSeconds);
         }
     }
@@ -140,6 +150,7 @@ public class PlayerController : MonoBehaviour {
     void AttackCoolDown()
     {
         coolDown = false;
+        anim.SetInteger("animState", 0);
     }
     void ColorReset()
     {

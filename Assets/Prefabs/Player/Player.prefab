@@ -125,13 +125,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3354bc3de538e5a45a394b5408440bd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minPos: 2
+  minPos: 1
   maxPos: 16
   speed: 2
   stikeDistance: 1.5
   coolDownRateInSeconds: 0.1
   walkDistance: 0
-  escapeNumber: 20
+  escapeNumber: 100
   damage: 10
   hp: 50
   number: {fileID: 1774551873252190, guid: 93a8d497658ff7d45adc525b9a31f453, type: 2}
@@ -169,7 +169,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300002, guid: b0d34d7ad35a6eb4f97091f263064c32, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 60e68030fa77cfa489facf5794103de1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
