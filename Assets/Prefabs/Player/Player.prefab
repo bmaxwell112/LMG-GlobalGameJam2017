@@ -95,7 +95,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 2, y: 2}
   m_EdgeRadius: 0
 --- !u!95 &95915755528044558
 Animator:
@@ -131,12 +131,21 @@ MonoBehaviour:
   stikeDistance: 1.5
   coolDownRateInSeconds: 0.1
   walkDistance: 0
-  escapeNumber: 50
+  escapeNumber: 5
   damage: 10
   hp: 50
   number: {fileID: 1774551873252190, guid: 93a8d497658ff7d45adc525b9a31f453, type: 2}
   controlPanel: {fileID: 0}
   teleport: {fileID: 1076496504505130, guid: 6d91980b219d3144abcb0a38bac756e4, type: 2}
+  punchHit: {fileID: 8300000, guid: 26b322e10a35ccd4e9f745fa79bd9487, type: 3}
+  punchMiss: {fileID: 8300000, guid: 8ad196525a91494419d34cccd3936002, type: 3}
+  punchButton: {fileID: 8300000, guid: d4ecbca3638be06408b71fd68802118a, type: 3}
+  hurtSound:
+  - {fileID: 8300000, guid: 79b0b6a5c13968441b09f057ef93443e, type: 3}
+  - {fileID: 8300000, guid: 7ab400e60b3f6ae4ca8a4a5cc3564140, type: 3}
+  - {fileID: 8300000, guid: 5af969af85a99e247ba0afb580aaf22a, type: 3}
+  - {fileID: 8300000, guid: ea0f715f898e39a41b375e46a0afcf1b, type: 3}
+  - {fileID: 8300000, guid: beb5c5a758d95ad4485647ccbadc84ee, type: 3}
 --- !u!212 &212786719886848300
 SpriteRenderer:
   m_ObjectHideFlags: 1

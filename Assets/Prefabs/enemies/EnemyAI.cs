@@ -26,6 +26,7 @@ public class EnemyAI : MonoBehaviour {
         barricade = FindObjectOfType<BarricadeManager>();
         audioSource = GetComponent<AudioSource>();
         boxCollider = GetComponent<BoxCollider2D>();
+        audioSource.volume = GameManager.volume;
     }
 
     // Update is called once per frame

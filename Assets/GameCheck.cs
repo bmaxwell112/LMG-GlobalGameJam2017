@@ -10,7 +10,7 @@ public class GameCheck : MonoBehaviour {
 		 * it will set the default SFX and Master Volumes */		
 		if (PlayerPrefsManager.GetGameCheck() != 1)
 		{
-			PlayerPrefsManager.SetMasterVolume(0.65f);
+			PlayerPrefsManager.SetMasterVolume(0.35f);
 			PlayerPrefsManager.SetSFXVolume(0.75f);
 			PlayerPrefsManager.SetGameCheck(1);
 		}

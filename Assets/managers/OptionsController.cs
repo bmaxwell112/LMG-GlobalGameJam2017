@@ -27,7 +27,10 @@ public class OptionsController : MonoBehaviour {
 		volumeSlider.value = PlayerPrefsManager.GetMasterVolume();
 		sfxVolumeSlider.value = PlayerPrefsManager.GetSFXVolume();		
 		confirmReset = GameObject.Find("ConfirmReset");
-		confirmReset.SetActive(false);
+        if (confirmReset)
+        {
+            confirmReset.SetActive(false);
+        }
 	}
 	
 	// Update is called once per frame
@@ -41,12 +44,13 @@ public class OptionsController : MonoBehaviour {
 	public void SaveAndExit(){
 		PlayerPrefsManager.SetMasterVolume (volumeSlider.value);
 		levelManager.LoadLevel("01a Start");
-	}
+        GameManager.volume = sfxVolumeSlider.value;
+    }
 
 	/* Used on Default button
 	 sets the volume default values. */
 	public void SetDefaults(){
-		volumeSlider.value = 0.65f;
+		volumeSlider.value = 0.35f;
 		sfxVolumeSlider.value = 0.75f;
 	}
 
