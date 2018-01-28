@@ -38,6 +38,7 @@ public class PlayerController : MonoBehaviour {
         }
         if (Input.GetKeyDown(KeyCode.Space) && !left)
         {
+            Debug.Log("test");
             AttackOrBarricade();
         }
         else if (Input.GetKeyDown(KeyCode.Space) && left && transform.position.x <= minPos + 0.5)
@@ -49,6 +50,10 @@ public class PlayerController : MonoBehaviour {
             {                
                 lvl.LoadLevel("03a Win");
             }
+        }
+        if (Input.GetKeyUp(KeyCode.LeftArrow))
+        {
+            left = false;
         }
     }
 
