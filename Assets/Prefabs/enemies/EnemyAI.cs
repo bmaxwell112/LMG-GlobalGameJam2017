@@ -5,12 +5,13 @@ using UnityEngine;
 public class EnemyAI : MonoBehaviour {
 
     public int hp, attack;
-    public float speed, attackRateInSeconds;
+    public float speed, attackRateInSeconds, destoryTimeFromDeath, attackDistance;
     public GameObject number;
 
     private float speedVariance, deathTime, hitTime;
     private PlayerController player;
-    private bool attacked, dead, knockback;
+    [HideInInspector]
+    public bool attacked, dead, knockback;
 
     void Start()
     {
@@ -25,7 +26,7 @@ public class EnemyAI : MonoBehaviour {
         if (!dead && !knockback) { MovementAndAttack(); }   
         if (dead)
         {
-            if (Time.time >= deathTime + 15)
+            if (Time.time >= deathTime + destoryTimeFromDeath)
             {
                 transform.localScale += Vector3.down * Time.deltaTime;
                 if(transform.localScale.y <= 0)
@@ -47,13 +48,9 @@ public class EnemyAI : MonoBehaviour {
 
     private void MovementAndAttack()
     {
-        if (transform.position.x > player.transform.position.x + 0.3)
+        if (transform.position.x > player.transform.position.x + attackDistance)
         {
             transform.position -= new Vector3(speedVariance, 0, 0) * Time.deltaTime;
-        }
-        else if (transform.position.x < player.transform.position.x - 0.1)
-        {
-            transform.position += new Vector3(speedVariance, 0, 0) * Time.deltaTime;
         }
         else
         {

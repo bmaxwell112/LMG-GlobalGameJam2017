@@ -38,6 +38,7 @@ GameObject:
   - component: {fileID: 114291202924487866}
   - component: {fileID: 61752379197467434}
   - component: {fileID: 95437356952904990}
+  - component: {fileID: 114199533122243030}
   m_Layer: 0
   m_Name: Enemy 1
   m_TagString: enemy
@@ -114,6 +115,18 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114199533122243030
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1999989822873170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c4b961492f8e3c4e9bb6eec20421cb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  explode: {fileID: 0}
 --- !u!114 &114291202924487866
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -128,8 +141,13 @@ MonoBehaviour:
   hp: 20
   attack: 20
   speed: 2
-  attackRateInSeconds: 1
+  attackRateInSeconds: 2
+  destoryTimeFromDeath: 2
+  attackDistance: 1.5
   number: {fileID: 1774551873252190, guid: 93a8d497658ff7d45adc525b9a31f453, type: 2}
+  attacked: 0
+  dead: 0
+  knockback: 0
 --- !u!212 &212693842949144280
 SpriteRenderer:
   m_ObjectHideFlags: 1

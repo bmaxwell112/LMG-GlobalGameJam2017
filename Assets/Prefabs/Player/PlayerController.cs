@@ -46,10 +46,6 @@ public class PlayerController : MonoBehaviour {
         {
             ControlPanelPressed();
         }
-        if (Input.GetKeyUp(KeyCode.LeftArrow))
-        {
-            left = false;
-        }
     }
 
     private void ControlPanelPressed()
