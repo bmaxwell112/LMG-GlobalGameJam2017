@@ -10,6 +10,8 @@ public class EnemyAI : MonoBehaviour {
 
     private float speedVariance, deathTime, hitTime;
     private PlayerController player;
+    private BarricadeManager barricade;
+    private int colliding = 0;
     [HideInInspector]
     public bool attacked, dead, knockback;
 
@@ -18,12 +20,12 @@ public class EnemyAI : MonoBehaviour {
         float rand = Random.Range(-0.2f, 0.2f);
         speedVariance = speed + rand;
         player = FindObjectOfType<PlayerController>();
+        barricade = FindObjectOfType<BarricadeManager>();
     }
 
     // Update is called once per frame
     void Update ()
     {
-        if (!dead && !knockback) { MovementAndAttack(); }   
         if (dead)
         {
             if (Time.time >= deathTime + destoryTimeFromDeath)
@@ -36,26 +38,60 @@ public class EnemyAI : MonoBehaviour {
                 
             }
         }
-        if(knockback)
+
+        if(colliding == 0 && !dead && !knockback)
         {
-            transform.position += (Vector3.right*2) * Time.deltaTime;
-            if(Time.time >= hitTime + 0.4f)
+            Move();
+        }
+
+        if (knockback)
+        {
+            transform.position += (Vector3.right * 2) * Time.deltaTime;
+            if (Time.time >= hitTime + 0.4f)
             {
                 knockback = false;
             }
         }
     }
 
-    private void MovementAndAttack()
+   void OnTriggerEnter2D(Collider2D coll)
+    {
+        if(coll.gameObject.tag == "Player" || coll.gameObject.tag == "barricade")
+        {
+            colliding++;
+            if (!attacked)
+            {
+                EnemyAttack(coll.gameObject.tag);
+            }
+        }
+    }
+
+    void OnTriggerStay2D(Collider2D other)
+    {
+        if(other.gameObject.tag == "Player" || other.gameObject.tag == "barricade")
+        {
+            if (!attacked)
+            {
+                EnemyAttack(other.gameObject.tag);
+            }
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D coll)
+    {
+        if(coll.gameObject.tag == "Player" || coll.gameObject.tag == "barricade")
+        {
+            colliding--;
+        }
+
+    }
+
+
+    private void Move()
     {
         if (transform.position.x > player.transform.position.x + attackDistance)
         {
             transform.position -= new Vector3(speedVariance, 0, 0) * Time.deltaTime;
-        }
-        else
-        {
-            if (!attacked)
-                EnemyAttack();
         }
     }
 
@@ -63,10 +99,18 @@ public class EnemyAI : MonoBehaviour {
     {
         attacked = false;
     }
-    void EnemyAttack()
+    void EnemyAttack(string tag)
     {
-        player.DamagePlayer(attack);
-        SpawnNumber(attack, player.transform.position);
+        if(tag == "Player")
+        {
+            player.DamagePlayer(attack);
+            SpawnNumber(attack, player.transform.position);
+        }
+        if(tag == "Barricade")
+        {
+            barricade.TakeDamage(attack);
+            SpawnNumber(attack, barricade.transform.position);
+        }
         attacked = true;
         Invoke("AttackDelay", attackRateInSeconds);
     }

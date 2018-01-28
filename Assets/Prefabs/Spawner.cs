@@ -8,6 +8,5 @@
     {
         yield return new WaitForSeconds(delayTime);        
         SpawnEnemies(value);
-        print("spawned" + value);
         StartCoroutine(SpawnFunction(spawnTime[value], value));
     } } 

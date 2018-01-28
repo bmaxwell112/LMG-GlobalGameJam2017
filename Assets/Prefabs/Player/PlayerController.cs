@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
 
-    public float minPos, maxPos, speed, stikeDistance, coolDownRateInSeconds, walkDistance, enemyCheckDistance;
+    public float minPos, maxPos, speed, stikeDistance, coolDownRateInSeconds, walkDistance;
     public int escapeNumber, damage, hp;
     public GameObject number;
 
@@ -22,10 +22,25 @@ public class PlayerController : MonoBehaviour {
         sprite = GetComponentInChildren<SpriteRenderer>();
     }
 
+    void OnTriggerStay2D(Collider2D coll)
+    {
+        if (coll.gameObject.tag == "enemy")
+        {
+            youShallNotPass = true;
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D coll)
+    {
+        if(coll.gameObject.tag == "enemy")
+        {
+            youShallNotPass = false;
+        }
+    }
+
     // Update is called once per frame
     void Update () {
-        youShallNotPass = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y), (Vector2.right / 10), enemyCheckDistance);
-        InputCheck();
+        InputCheck();        
     }
 
     void InputCheck()
@@ -36,9 +51,12 @@ public class PlayerController : MonoBehaviour {
             left = true;
             sprite.flipX = true;
         }
-        if (Input.GetKey(KeyCode.RightArrow) && transform.position.x <= maxPos && !youShallNotPass)
+        if (Input.GetKey(KeyCode.RightArrow) && transform.position.x <= maxPos)
         {
-            transform.position += new Vector3(speed, 0, 0) * Time.deltaTime;
+            if (!youShallNotPass)
+            {
+                transform.position += new Vector3(speed, 0, 0) * Time.deltaTime;
+            }
             left = false;
             sprite.flipX = false;
         }
@@ -71,8 +89,10 @@ public class PlayerController : MonoBehaviour {
     void AttackOrBarricade()
     {
         if(!coolDown)
-        {             
+        {
+            LayerMask mask = 2;
             RaycastHit2D hit = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y), (Vector2.right/10), stikeDistance);
+            
             if (hit)
             {      
                 if(hit.collider.gameObject.CompareTag("enemy"))
