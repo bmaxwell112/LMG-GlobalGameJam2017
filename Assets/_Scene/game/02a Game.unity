@@ -319,6 +319,11 @@ Prefab:
       propertyPath: controlPanel
       value: 
       objectReference: {fileID: 1191772138}
+    - target: {fileID: 114996546343963280, guid: 0de98ea2b6053b94996dd34f49db1fda,
+        type: 2}
+      propertyPath: escapeNumber
+      value: 50
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0de98ea2b6053b94996dd34f49db1fda, type: 2}
   m_IsPrefabParent: 0

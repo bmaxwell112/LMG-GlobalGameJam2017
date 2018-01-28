@@ -450,23 +450,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelMusicChangeArray:
   - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 8300000, guid: ce52029122d656e4d8bfa7d46e4afdf7, type: 3}
+  - {fileID: 8300000, guid: ce52029122d656e4d8bfa7d46e4afdf7, type: 3}
+  - {fileID: 8300000, guid: bf9f478e93c2a744fa629c1aa56a1c44, type: 3}
+  - {fileID: 8300000, guid: bf9f478e93c2a744fa629c1aa56a1c44, type: 3}
+  - {fileID: 8300000, guid: ce52029122d656e4d8bfa7d46e4afdf7, type: 3}
+  - {fileID: 8300000, guid: ce52029122d656e4d8bfa7d46e4afdf7, type: 3}
 --- !u!4 &433558347
 Transform:
   m_ObjectHideFlags: 0
@@ -527,7 +516,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:

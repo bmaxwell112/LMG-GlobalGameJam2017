@@ -100,6 +100,7 @@ public class PlayerController : MonoBehaviour {
             if (buttonPressed >= escapeNumber)
             {
                 Instantiate(teleport);
+                GetComponent<BoxCollider2D>().enabled = false;
                 win = true;
             }
             button.SetTrigger("press");
