@@ -13,6 +13,7 @@ public class BarricadeManager : MonoBehaviour {
     private BoxCollider2D collisionBox;    
     private GameObject doorImage;
     private AudioSource audioSource;
+    private Spawner spawner;
 
 
     // Use this for initialization
@@ -20,11 +21,11 @@ public class BarricadeManager : MonoBehaviour {
         collisionBox = GetComponent<BoxCollider2D>();
         doorImage = transform.GetChild(0).gameObject;
         audioSource = GetComponent<AudioSource>();
+        spawner = FindObjectOfType<Spawner>();
     }
 	
 	// Update is called once per frame
 	void Update () {
-        print(health);
         if (health > 50)
         {
             doorImage.GetComponent<SpriteRenderer>().enabled = false;
@@ -46,6 +47,15 @@ public class BarricadeManager : MonoBehaviour {
 
     public void BuildBarricade()
     {
+        print("ran this");
+        foreach (Transform child in spawner.transform)
+        {
+            if(transform.position.x + 1 > child.position.x && !child.GetComponent<EnemyAI>().dead)
+            {                
+                print("broke");
+                return;
+            }
+        }
         health = 100;
     }
 

@@ -1,12 +1,11 @@
 ﻿using System.Collections; using System.Collections.Generic; using UnityEngine;  public class Spawner : MonoBehaviour {      public GameObject[] enemyPrefab;     public int[] spawnRate;
-    public float[] spawnTime;     public bool SetSpawnsAI, wait;      private int phase = 0;       // Use this for initialization     void Start() {         for (int i = 0; i < spawnRate.Length; i++)
+    public float[] spawnTime;     public bool SetSpawnsAI, wait;          private int phase = 0;       // Use this for initialization     void Start() {         for (int i = 0; i < spawnRate.Length; i++)
         {
             StartCoroutine(SpawnFunction(spawnTime[i], i));
         }         if(SetSpawnsAI)
         {
             SpawningOverTime();
-        }     } 	 	// Update is called once per frame 	void Update () {
-        print(wait);        
+        }     } 	 	// Update is called once per frame 	void Update () {        
         if (!gameObject.GetComponentInChildren<EnemyAI>() && wait)
         {
             if (phase == 1)

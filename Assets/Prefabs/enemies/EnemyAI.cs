@@ -88,7 +88,6 @@ public class EnemyAI : MonoBehaviour {
 
     void OnTriggerExit2D(Collider2D coll)
     {
-        Debug.Log("exit");
         if(coll.gameObject.tag == "Player" || coll.gameObject.tag == "Barricade")
         {
             colliding = 0;
@@ -108,7 +107,6 @@ public class EnemyAI : MonoBehaviour {
 
     void AttackDelay()
     {
-        Debug.Log("attacked is false");
         attacked = false;
     }
     void EnemyAttack(string tag)

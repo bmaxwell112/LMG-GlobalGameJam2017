@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour {
     private Animator anim, button;
     private AudioSource audioSource;
     private ControlPanel cPanel;
+    private Spawner spawner;
     private float volume;
 
 
@@ -34,6 +35,7 @@ public class PlayerController : MonoBehaviour {
         audioSource = GetComponent<AudioSource>();
         audioSource.volume = GameManager.volume;
         cPanel = FindObjectOfType<ControlPanel>();
+        spawner = FindObjectOfType<Spawner>();
     }
 
     void OnTriggerEnter2D(Collider2D coll)
@@ -77,7 +79,7 @@ public class PlayerController : MonoBehaviour {
 
         if (Input.GetKeyDown(KeyCode.Space) && !left && !Input.GetKey(KeyCode.RightArrow) && !Input.GetKey(KeyCode.LeftArrow))
         {
-            AttackOrBarricade();
+            Attack();
         }
         else if (Input.GetKeyDown(KeyCode.Space) && left && transform.position.x <= minPos + 0.5)
         {
@@ -86,6 +88,11 @@ public class PlayerController : MonoBehaviour {
                 ControlPanelPressed();
             }
         }
+        if (Input.GetKeyDown(KeyCode.Space) && transform.position.x >= maxPos - 1)
+        {         
+             BarricadeReference.BuildBarricade();
+        }
+        
         if (Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.LeftArrow))
         {
             anim.SetInteger("animState", 0);
@@ -125,26 +132,20 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    void AttackOrBarricade()
+    void Attack()
     {
         if(!coolDown)
         {
             RaycastHit2D hit = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y), (Vector2.right/30), stikeDistance);
             if (hit)
-            {      
-                if(hit.collider.gameObject.CompareTag("enemy"))
+            {
+                if (hit.collider.gameObject.CompareTag("enemy"))
                 {
                     print("hit enemy");
                     PlayAudio(punchHit);
                     hit.collider.gameObject.GetComponent<EnemyAI>().DamageEnemy(damage);
-                    SpawnNumber(damage, hit.collider.gameObject.transform.position);                    
-                }                        
-
-                if(hit.collider.gameObject.tag == "Barricade")
-                {
-                    print("build barricade");
-                    BarricadeReference.BuildBarricade();
-                }
+                    SpawnNumber(damage, hit.collider.gameObject.transform.position);
+                }                
             }
             else
             {
